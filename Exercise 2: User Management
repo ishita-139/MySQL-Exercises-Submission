@@ -1,0 +1,12 @@
+-- 1. Create the database
+CREATE DATABASE vtapp;
+
+-- 2. Create a user with a password
+CREATE USER 'vtapp_user'@'localhost'
+IDENTIFIED BY 'Vtapp@123';
+
+-- 3. Grant all privileges on the vtapp database
+GRANT ALL PRIVILEGES ON vtapp.* TO 'vtapp_user'@'localhost';
+
+-- 4. Verify the user's privileges
+SHOW GRANTS FOR 'vtapp_user'@'localhost';
