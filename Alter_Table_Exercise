@@ -1,0 +1,19 @@
+-- Using MySQL 5.7.30
+-- Your Queries Here.
+
+-- Add statements like 'SHOW KEYS FROM TABLE_NAME;' and 'DESCRIBE TABLE_NAME;' to help reviewer to visualize DB.
+-- Do not include 'create database' statements. One db will be created for you. Just use tables you created in the schema tab.
+
+CREATE TABLE testing_table (
+    name VARCHAR(50),
+    contact_name VARCHAR(50),
+    roll_no VARCHAR(10)
+);
+
+ALTER TABLE testing_table DROP COLUMN name;
+
+ALTER TABLE testing_table RENAME COLUMN contact_name TO username;
+
+ALTER TABLE testing_table ADD COLUMN first_name VARCHAR(50), ADD COLUMN last_name VARCHAR(50);
+
+ALTER TABLE testing_table MODIFY COLUMN roll_no INT;
