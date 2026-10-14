@@ -1,0 +1,40 @@
+-- Using MySQL 5.7.30
+-- Your Queries Here.
+
+-- Add statements like 'SHOW KEYS FROM TABLE_NAME;' and 'DESCRIBE TABLE_NAME;' to help reviewer to visualize DB.
+-- Do not include 'create database' statements. One db will be created for you. Just use tables you created in the schema tab.
+
+-- Q1
+-- Places where Jones can eat — using a nested subquery
+Select distinct LOCATION from SANDWICHES where FILLING in (
+    select FILLING from TASTES where NAME = 'Jones'
+);
+
+-- Places where Jones can eat — without nested subquer
+Select distinct S.LOCATION
+from SANDWICHES S join TASTES T
+on S.FILLING = T.FILLING
+where T.NAME = 'Jones';
+
+-- For each location, number of people who can eat there
+Select S.LOCATION, count(distinct T.NAME) as people
+from SANDWICHES S join TASTES T
+on S.FILLING = T.FILLING
+group by S.LOCATION;
+
+-- Q2 
+-- Names of all library books published by Macmillan
+Select Title from Titles where Publisher = 'Macmillan';
+
+-- Branches that hold any books by Ann Brown — using nested subquery
+Select distinct Branch from Holdings where Title in (
+    select Title from Titles where Author = 'Ann Brown');
+
+-- Branches that hold any books by Ann Brown — without nested subquery
+Select distinct H.Branch
+from Holdings H join Titles T
+on H.Title = T.Title
+where T.Author = 'Ann Brown';
+
+-- Total number of books held at each branch
+Select Branch, sum(`#copies`) as total_books from Holdings group by Branch;
